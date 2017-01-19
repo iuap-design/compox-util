@@ -98,6 +98,3 @@ App.prototype.ajax = ajax;
 App.prototype.serverEvent = serverEvent;
 // util
 App.prototype.setEnable = setEnable;
-
-
-window.App = App;
