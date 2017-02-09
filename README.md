@@ -1,6 +1,6 @@
 # compox-util
 
-`compox-util`主要是针对app中的功能方法，如ajax等
+`compox-util`主要是添加app中的功能方法，如ajax等
 
 ## 开发技术说明
 
