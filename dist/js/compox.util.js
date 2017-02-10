@@ -54,27 +54,27 @@
 
 	var _comp = __webpack_require__(13);
 
-	var _validate = __webpack_require__(15);
+	var _validate = __webpack_require__(14);
 
-	var _cache = __webpack_require__(16);
+	var _cache = __webpack_require__(15);
 
-	var _iwebCore = __webpack_require__(17);
+	var _iwebCore = __webpack_require__(16);
 
-	var _ajax = __webpack_require__(18);
+	var _ajax = __webpack_require__(17);
 
-	var _serverEvent = __webpack_require__(20);
+	var _serverEvent = __webpack_require__(19);
 
-	var _util = __webpack_require__(21);
+	var _util = __webpack_require__(20);
 
-	// adjustMetaFunc
+	// setAdjustMetaFunc
 	/**
-	 * Module : Kero webpack entry app index
-	 * Author : liuyk(liuyuekai@yonyou.com)
-	 * Date	  : 2016-08-09 15:24:46
+	 * Module : compox-util webpack entry app index
+	 * Author : huyue(huyueb@yonyou.com)
+	 * Date	  : 2017-01-18 09:34:01
 	 */
 
 	//相关依赖导入
-	_createApp.App.prototype.adjustMetaFunc = _adjustMetaFunc.adjustMetaFunc;
+	_createApp.App.prototype.setAdjustMetaFunc = _adjustMetaFunc.setAdjustMetaFunc;
 	// dataTable
 	_createApp.App.prototype.addDataTable = _dataTable.addDataTable;
 	_createApp.App.prototype.getDataTable = _dataTable.getDataTable;
@@ -110,15 +110,15 @@
 	// util
 	_createApp.App.prototype.setEnable = _util.setEnable;
 
-	window.App = _createApp.App;
-
 /***/ },
 /* 1 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	exports.__esModule = true;
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
 	exports.createApp = exports.App = undefined;
 
 	var _compMgr = __webpack_require__(2);
@@ -200,14 +200,16 @@
 
 	'use strict';
 
-	exports.__esModule = true;
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
 	exports.compMgr = undefined;
 
 	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; /**
-	                                                                                                                                                                                                                                                                               * Module : Sparrow compMgr
-	                                                                                                                                                                                                                                                                               * Author : Kvkens(yueming@yonyou.com)
+	                                                                                                                                                                                                                                                                               * Module : compox compMgr
+	                                                                                                                                                                                                                                                                               * Author : huyue(huyueb@yonyou.com)
 	                                                                                                                                                                                                                                                                               * Date	  : 2016-07-28 18:41:06
-	                                                                                                                                                                                                                                                                               * Update : 2016-09-13 09:26:00
+	                                                                                                                                                                                                                                                                               * Update : 2017-01-18 09:26:00
 	                                                                                                                                                                                                                                                                               */
 
 	var _dom = __webpack_require__(3);
@@ -305,6 +307,7 @@
 
 	var CompMgr = {
 	    plugs: {},
+	    //用来存储控件的名称对应列表
 	    dataAdapters: {},
 	    /** 注册的控件*/
 	    registeredControls: [],
@@ -367,6 +370,11 @@
 	        //var key = dataType ? name + '.' + dataType : name;
 	        return this.dataAdapters[name];
 	    },
+	    /**
+	     * 创建dataAdapter,通过识别控件的type，来找到它对应的adapter
+	     * @param  {[type]} options [description]
+	     * @return {[type]}         [description]
+	     */
 	    createDataAdapter: function createDataAdapter(options) {
 	        var opt = options['options'];
 	        var type = opt['type'],
@@ -411,7 +419,6 @@
 	        };
 	        this.registeredControls.push(newConfig);
 	    },
-
 	    updateComp: function updateComp(ele) {
 	        this._reorderComps();
 	        for (var n = 0; n < this.registeredControls.length; n++) {
@@ -448,27 +455,15 @@
 	var compMgr = CompMgr;
 	exports.compMgr = compMgr;
 
-	///**
-	// * 加载控件
-	// */
-	//
-	//if (document.readyState && document.readyState === 'complete'){
-	//    compMgr.updateComp();
-	//}else{
-	//    on(window, 'load', function() {
-	//
-	//        //扫描并生成控件
-	//        compMgr.updateComp();
-	//    });
-	//}
-
 /***/ },
 /* 3 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	exports.__esModule = true;
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
 	exports.getElementTop = exports.getElementLeft = exports.showPanelByEle = exports.getScroll = exports.getOffset = exports.makeModal = exports.makeDOM = exports.getZIndex = exports.getStyle = exports.wrap = exports.css = exports.closest = exports.toggleClass = exports.hasClass = exports.removeClass = exports.addClass = undefined;
 
 	var _event = __webpack_require__(4);
@@ -785,7 +780,9 @@
 
 	"use strict";
 
-	exports.__esModule = true;
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
 	exports.event = exports.stopEvent = exports.trigger = exports.off = exports.on = undefined;
 
 	var _env = __webpack_require__(5);
@@ -1177,7 +1174,9 @@
 
 	'use strict';
 
-	exports.__esModule = true;
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
 	exports.env = undefined;
 
 	var _extend = __webpack_require__(6);
@@ -1384,7 +1383,9 @@
 
 	'use strict';
 
-	exports.__esModule = true;
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
 	exports.extend = undefined;
 
 	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; /**
@@ -1434,7 +1435,9 @@
 
 	"use strict";
 
-	exports.__esModule = true;
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
 	/**
 	 * Module : Sparrow extend enum
 	 * Author : Kvkens(yueming@yonyou.com)
@@ -1470,7 +1473,9 @@
 
 	'use strict';
 
-	exports.__esModule = true;
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
 
 	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
@@ -1630,7 +1635,9 @@
 
 	'use strict';
 
-	exports.__esModule = true;
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
 	exports.hotkeys = undefined;
 
 	var _class = __webpack_require__(10);
@@ -1795,7 +1802,9 @@
 
 	'use strict';
 
-	exports.__esModule = true;
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
 	/**
 	 * Module : Sparrow class
 	 * Author : Kvkens(yueming@yonyou.com)
@@ -1982,11 +1991,13 @@
 
 	"use strict";
 
-	exports.__esModule = true;
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
 	/**
-	 * Module : kero app AdjustMetaFunc
-	 * Author : liuyk(liuyk@yonyou.com)
-	 * Date	  : 2016-07-29 09:34:01
+	 * Module : compox-util setAdjustMetaFunc
+	 * Author : huyue(huyueb@yonyou.com)
+	 * Date	  : 2017-01-18 09:34:01
 	 */
 
 	var setAdjustMetaFunc = function setAdjustMetaFunc(adjustFunc) {
@@ -2001,11 +2012,13 @@
 
 	"use strict";
 
-	exports.__esModule = true;
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
 	/**
-	 * Module : kero app dataTable
-	 * Author : liuyk(liuyk@yonyou.com)
-	 * Date	  : 2016-07-29 09:34:01
+	 * Module : compox-util dataTable
+	 * Author : huyue(huyueb@yonyou.com)
+	 * Date	  : 2017-01-18 09:34:01
 	 */
 
 	var addDataTable = function addDataTable(dataTable) {
@@ -2030,10 +2043,12 @@
 
 	'use strict';
 
-	exports.__esModule = true;
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
 	exports.showComp = exports.getComps = exports.getCompsByType = exports.getCompsByDataTable = exports.getComp = exports.createComp = undefined;
 
-	var _compMgr = __webpack_require__(14);
+	var _compMgr = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"tinper-sparrow/js/compMgr\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
 
 	var _util = __webpack_require__(8);
 
@@ -2047,9 +2062,9 @@
 	    }
 	    return comp;
 	}; /**
-	    * Module : kero app comp
+	    * Module : compox-util comp
 	    * Author : liuyk(liuyk@yonyou.com)
-	    * Date   : 2016-07-29 09:34:01
+	    * Date   : 2017-01-18 09:34:01
 	    */
 
 
@@ -2158,281 +2173,15 @@
 
 	'use strict';
 
-	exports.__esModule = true;
-	exports.compMgr = undefined;
-
-	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; /**
-	                                                                                                                                                                                                                                                                               * Module : Sparrow compMgr
-	                                                                                                                                                                                                                                                                               * Author : Kvkens(yueming@yonyou.com)
-	                                                                                                                                                                                                                                                                               * Date	  : 2016-07-28 18:41:06
-	                                                                                                                                                                                                                                                                               * Update : 2016-09-13 09:26:00
-	                                                                                                                                                                                                                                                                               */
-
-	var _dom = __webpack_require__(3);
-
-	var _util = __webpack_require__(8);
-
-	function _findRegisteredClass(name, optReplace) {
-	    for (var i = 0; i < CompMgr.registeredControls.length; i++) {
-	        if (CompMgr.registeredControls[i].className === name) {
-	            if (typeof optReplace !== 'undefined') {
-	                CompMgr.registeredControls[i] = optReplace;
-	            }
-	            return CompMgr.registeredControls[i];
-	        }
-	    }
-	    return false;
-	}
-
-	function _getUpgradedListOfElement(element) {
-	    var dataUpgraded = element.getAttribute('data-upgraded');
-	    // Use `['']` as default value to conform the `,name,name...` style.
-	    return dataUpgraded === null ? [''] : dataUpgraded.split(',');
-	}
-
-	function _isElementUpgraded(element, jsClass) {
-	    var upgradedList = _getUpgradedListOfElement(element);
-	    return upgradedList.indexOf(jsClass) != -1;
-	}
-
-	function _upgradeElement(element, optJsClass) {
-	    if (!((typeof element === 'undefined' ? 'undefined' : _typeof(element)) === 'object' && element instanceof Element)) {
-	        throw new Error('Invalid argument provided to upgrade MDL element.');
-	    }
-	    var upgradedList = _getUpgradedListOfElement(element);
-	    var classesToUpgrade = [];
-	    if (!optJsClass) {
-	        var className = element.className;
-	        for (var i = 0; i < CompMgr.registeredControls.length; i++) {
-	            var component = CompMgr.registeredControls[i];
-	            if (className.indexOf(component.cssClass) > -1 && classesToUpgrade.indexOf(component) === -1 && !_isElementUpgraded(element, component.className)) {
-	                classesToUpgrade.push(component);
-	            }
-	        }
-	    } else if (!_isElementUpgraded(element, optJsClass)) {
-	        classesToUpgrade.push(_findRegisteredClass(optJsClass));
-	    }
-
-	    // Upgrade the element for each classes.
-	    for (var i = 0, n = classesToUpgrade.length, registeredClass; i < n; i++) {
-	        registeredClass = classesToUpgrade[i];
-	        if (registeredClass) {
-	            if (element[registeredClass.className]) {
-	                continue;
-	            }
-	            // Mark element as upgraded.
-	            upgradedList.push(registeredClass.className);
-	            element.setAttribute('data-upgraded', upgradedList.join(','));
-	            var instance = new registeredClass.classConstructor(element);
-	            CompMgr.createdControls.push(instance);
-	            // Call any callbacks the user has registered with this component type.
-	            for (var j = 0, m = registeredClass.callbacks.length; j < m; j++) {
-	                registeredClass.callbacks[j](element);
-	            }
-	            element[registeredClass.className] = instance;
-	        } else {
-	            throw new Error('Unable to find a registered component for the given class.');
-	        }
-	    }
-	}
-
-	function _upgradeDomInternal(optJsClass, optCssClass, ele) {
-	    if (typeof optJsClass === 'undefined' && typeof optCssClass === 'undefined') {
-	        for (var i = 0; i < CompMgr.registeredControls.length; i++) {
-	            _upgradeDomInternal(CompMgr.registeredControls[i].className, registeredControls[i].cssClass, ele);
-	        }
-	    } else {
-	        var jsClass = optJsClass;
-	        if (!optCssClass) {
-	            var registeredClass = _findRegisteredClass(jsClass);
-	            if (registeredClass) {
-	                optCssClass = registeredClass.cssClass;
-	            }
-	        }
-	        var elements;
-	        if (ele) {
-	            elements = (0, _dom.hasClass)(ele, optCssClass) ? [ele] : ele.querySelectorAll('.' + optCssClass);
-	        } else {
-	            elements = document.querySelectorAll('.' + optCssClass);
-	        }
-	        for (var n = 0; n < elements.length; n++) {
-	            _upgradeElement(elements[n], jsClass);
-	        }
-	    }
-	}
-
-	var CompMgr = {
-	    plugs: {},
-	    dataAdapters: {},
-	    /** 注册的控件*/
-	    registeredControls: [],
-	    createdControls: [],
-	    /**
-	     *
-	     * @param options  {el:'#content', model:{}}
-	     */
-	    apply: function apply(options) {
-	        if (options) {
-	            var _el = options.el || document.body;
-	            var model = options.model;
-	        }
-	        if (typeof _el == 'string') {
-	            _el = document.body.querySelector(_el);
-	        }
-	        if (_el == null || (typeof _el === 'undefined' ? 'undefined' : _typeof(_el)) != 'object') _el = document.body;
-	        var comps = _el.querySelectorAll('[u-meta]');
-	        comps.forEach(function (element) {
-	            if (element['comp']) return;
-	            var options = JSON.parse(element.getAttribute('u-meta'));
-	            if (options && options['type']) {
-	                //var comp = CompMgr._createComp({el:element,options:options,model:model});
-	                var comp = CompMgr.createDataAdapter({
-	                    el: element,
-	                    options: options,
-	                    model: model
-	                });
-	                if (comp) {
-	                    element['adpt'] = comp;
-	                    element['u-meta'] = comp;
-	                }
-	            }
-	        });
-	    },
-	    addPlug: function addPlug(config) {
-	        var plug = config['plug'],
-	            name = config['name'];
-	        this.plugs || (this.plugs = {});
-	        if (this.plugs[name]) {
-	            throw new Error('plug has exist:' + name);
-	        }
-	        plug.compType = name;
-	        this.plugs[name] = plug;
-	    },
-	    addDataAdapter: function addDataAdapter(config) {
-	        var adapter = config['adapter'],
-	            name = config['name'];
-	        //dataType = config['dataType'] || ''
-	        //var key = dataType ? name + '.' + dataType : name;
-	        this.dataAdapters || (dataAdapters = {});
-	        if (this.dataAdapters[name]) {
-	            throw new Error('dataAdapter has exist:' + name);
-	        }
-	        this.dataAdapters[name] = adapter;
-	    },
-	    getDataAdapter: function getDataAdapter(name) {
-	        if (!name) return;
-	        this.dataAdapters || (dataAdapters = {});
-	        //var key = dataType ? name + '.' + dataType : name;
-	        return this.dataAdapters[name];
-	    },
-	    createDataAdapter: function createDataAdapter(options) {
-	        var opt = options['options'];
-	        var type = opt['type'],
-	            id = opt['id'];
-	        var adpt = this.dataAdapters[type];
-	        if (!adpt) return null;
-	        var comp = new adpt(options);
-	        comp.type = type;
-	        comp.id = id;
-	        return comp;
-	    },
-	    _createComp: function _createComp(options) {
-	        var opt = options['options'];
-	        var type = opt['type'];
-	        var plug = this.plugs[type];
-	        if (!plug) return null;
-	        var comp = new plug(options);
-	        comp.type = type;
-	        return comp;
-	    },
-	    /**
-	     * 注册UI控件
-	     */
-	    regComp: function regComp(config) {
-	        var newConfig = {
-	            classConstructor: config.comp,
-	            className: config.compAsString || config['compAsString'],
-	            cssClass: config.css || config['css'],
-	            callbacks: [],
-	            dependencies: config.dependencies || []
-	        };
-	        config.comp.prototype.compType = config.compAsString;
-	        for (var i = 0; i < this.registeredControls.length; i++) {
-	            var item = this.registeredControls[i];
-	            //registeredControls.forEach(function(item) {
-	            if (item.cssClass === newConfig.cssClass) {
-	                throw new Error('The provided cssClass has already been registered: ' + item.cssClass);
-	            }
-	            if (item.className === newConfig.className) {
-	                throw new Error('The provided className has already been registered');
-	            }
-	        };
-	        this.registeredControls.push(newConfig);
-	    },
-
-	    updateComp: function updateComp(ele) {
-	        this._reorderComps();
-	        for (var n = 0; n < this.registeredControls.length; n++) {
-	            _upgradeDomInternal(this.registeredControls[n].className, null, ele);
-	        }
-	    },
-	    // 后续遍历registeredControls，重新排列
-	    _reorderComps: function _reorderComps() {
-	        var tmpArray = [];
-	        var dictory = {};
-
-	        for (var n = 0; n < this.registeredControls.length; n++) {
-	            dictory[this.registeredControls[n].className] = this.registeredControls[n];
-	        }
-	        for (var n = 0; n < this.registeredControls.length; n++) {
-	            traverse(this.registeredControls[n]);
-	        }
-
-	        this.registeredControls = tmpArray;
-
-	        function traverse(control) {
-	            if ((0, _util.inArray)(control, tmpArray)) return;
-	            if (control.dependencies.length > 0) {
-	                for (var i = 0, len = control.dependencies.length; i < len; i++) {
-	                    var childControl = dictory[control.dependencies[i]];
-	                    traverse(childControl);
-	                }
-	            }
-	            tmpArray.push(control);
-	        }
-	    }
-	};
-
-	var compMgr = CompMgr;
-	exports.compMgr = compMgr;
-
-	///**
-	// * 加载控件
-	// */
-	//
-	//if (document.readyState && document.readyState === 'complete'){
-	//    compMgr.updateComp();
-	//}else{
-	//    on(window, 'load', function() {
-	//
-	//        //扫描并生成控件
-	//        compMgr.updateComp();
-	//    });
-	//}
-
-/***/ },
-/* 15 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	exports.__esModule = true;
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
 	exports.compsValidateMultiParam = exports.compsValidate = undefined;
 
 	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; /**
-	                                                                                                                                                                                                                                                                               * Module : kero app validate
-	                                                                                                                                                                                                                                                                               * Author : liuyk(liuyk@yonyou.com)
-	                                                                                                                                                                                                                                                                               * Date   : 2016-07-29 09:34:01
+	                                                                                                                                                                                                                                                                               * Module : compox-util validate
+	                                                                                                                                                                                                                                                                               * Author : huyue(huyueb@yonyou.com)
+	                                                                                                                                                                                                                                                                               * Date   : 2017-01-18 09:34:01
 	                                                                                                                                                                                                                                                                               */
 
 	var _env = __webpack_require__(5);
@@ -2492,16 +2241,18 @@
 	exports.compsValidateMultiParam = compsValidateMultiParam;
 
 /***/ },
-/* 16 */
+/* 15 */
 /***/ function(module, exports) {
 
 	"use strict";
 
-	exports.__esModule = true;
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
 	/**
-	 * Module : kero app cache
-	 * Author : liuyk(liuyk@yonyou.com)
-	 * Date   : 2016-07-29 09:34:01
+	 * Module : compox-util cache
+	 * Author : huyue(huyueb@yonyou.com)
+	 * Date   : 2017-01-18 09:34:01
 	 */
 
 	var setUserCache = function setUserCache(key, value) {
@@ -2557,16 +2308,18 @@
 	exports.removeSessionCache = removeSessionCache;
 
 /***/ },
-/* 17 */
+/* 16 */
 /***/ function(module, exports) {
 
 	"use strict";
 
-	exports.__esModule = true;
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
 	/**
-	 * Module : kero app iwebCore
-	 * Author : liuyk(liuyk@yonyou.com)
-	 * Date	  : 2016-07-29 09:34:01
+	 * Module : compox-util iwebCore
+	 * Author : huyue(huyueb@yonyou.com)
+	 * Date	  : 2017-01-18 09:34:01
 	 */
 
 	var getEnvironment = function getEnvironment() {
@@ -2586,24 +2339,33 @@
 	exports.getClientAttribute = getClientAttribute;
 
 /***/ },
-/* 18 */
+/* 17 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	exports.__esModule = true;
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
 	exports.ajax = undefined;
 
-	var _ajax = __webpack_require__(19);
+	var _ajax = __webpack_require__(18);
 
 	var ajax = function ajax(params) {
 	    params = _wrapAjax.call(this, params);
 	    (0, _ajax.ajax)(params);
-	}; /**
-	    * Module : kero app ajax
-	    * Author : liuyk(liuyk@yonyou.com)
-	    * Date   : 2016-07-29 09:34:01
-	    */
+	};
+
+	/**
+	 * 对ajax的请求的数据进行处理
+	 * @param  {[type]} params [description]
+	 * @return {[type]}        [description]
+	 */
+	/**
+	 * Module : compox-util ajax
+	 * Author : huyue(huyueb@yonyou.com)
+	 * Date   : 2017-01-18 09:34:01
+	 */
 
 	var _wrapAjax = function _wrapAjax(params) {
 	    var self = this;
@@ -2645,12 +2407,14 @@
 	exports.ajax = ajax;
 
 /***/ },
-/* 19 */
+/* 18 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 
-	exports.__esModule = true;
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
 	exports.ajax = undefined;
 
 	var _env = __webpack_require__(5);
@@ -2769,16 +2533,18 @@
 	exports.ajax = ajax;
 
 /***/ },
-/* 20 */
+/* 19 */
 /***/ function(module, exports) {
 
 	"use strict";
 
-	exports.__esModule = true;
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
 	/**
-	 * Module : kero app serverEvent
-	 * Author : liuyk(liuyk@yonyou.com)
-	 * Date	  : 2016-07-29 09:34:01
+	 * Module : compox-util serverEvent
+	 * Author : huyue(huyueb@yonyou.com)
+	 * Date	  : 2017-01-18 09:34:01
 	 */
 
 	var serverEvent = function serverEvent() {
@@ -2788,12 +2554,14 @@
 	exports.serverEvent = serverEvent;
 
 /***/ },
-/* 21 */
+/* 20 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	exports.__esModule = true;
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
 	exports.setEnable = undefined;
 
 	var _util = __webpack_require__(8);
@@ -2810,9 +2578,9 @@
 	        }
 	    });
 	}; /**
-	    * Module : kero app util
-	    * Author : liuyk(liuyk@yonyou.com)
-	    * Date   : 2016-07-29 09:34:01
+	    * Module : compox-util util
+	    * Author : huyue(huyueb@yonyou.com)
+	    * Date   : 2017-01-18 09:34:01
 	    */
 
 	exports.setEnable = setEnable;
