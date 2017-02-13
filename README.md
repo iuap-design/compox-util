@@ -6,7 +6,7 @@
 
 
 [中文文档](./README_CN.md)
-##  介绍
+##  Introduction
 `compox-util` provides tools for createApp output object
 
 ## Contributing
