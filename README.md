@@ -1,23 +1,53 @@
-# compox-util
 
-`compox-util`主要是添加app中的功能方法，如ajax等
+[![npm version](https://img.shields.io/npm/v/compox-util.svg)](https://www.npmjs.com/package/compox-util)
+[![Build Status](https://img.shields.io/travis/iuap-design/compox-util/master.svg)](https://travis-ci.org/iuap-design/compox-util)
+[![devDependency Status](https://img.shields.io/david/dev/iuap-design/compox-util.svg)](https://david-dm.org/iuap-design/compox-util#info=devDependencies)
+[![NPM downloads](http://img.shields.io/npm/dm/compox-util.svg?style=flat)](https://npmjs.org/package/compox-util)
 
-## 开发技术说明
 
-* 基于Webpack构建资源.
-* 使用ES6语法特性.
-* 导出[umd](https://github.com/umdjs/umd)格式文件，随处使用.
-* 使用[Mocha](http://mochajs.org/) 和 [Chai](http://chaijs.com/) 进行项目测试.
-* [ESLint](http://eslint.org/)帮助我们进行代码规范检测.
+[中文文档](./README_CN.md)
+##  介绍
+`compox-util` provides tools for createApp output object
 
-## 如何开发
+## Contributing
 
-安装依赖
+
+### Feedback
+
+If you encounter any problems , submit [issues](https://github.com/iuap-design/compox-util/issues),or pull request。
+
+[PR code](CONTRIBUTING.md)
+
+### Develop
+
+Developers can participate in the development of compox-util,  but also can be based on compox-util two development
+
+
+compox-util use gulp.js and webpack build the project.
+
+
+clone：
+
+```
+$ git clone git@github.com:iuap-design/compox-util.git
+```
+
+install：
+
 ```
 $ npm install
 ```
 
-编译产出
+build：
+
 ```
 $ npm run product
 ```
+
+### Website Chat Group
+
+527124070
+
+## Licence 版权
+
+[MIT](./LICENSE)
