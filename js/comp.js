@@ -3,7 +3,7 @@
  * Author : liuyk(liuyk@yonyou.com)
  * Date   : 2017-01-18 09:34:01
  */
-import {compMgr} from 'tinper-sparrow/js/compMgr';
+import {compMgr} from 'compox/js/compMgr';
 import {each, isArray} from 'tinper-sparrow/js/util';
 import {getOffset, getScroll} from 'tinper-sparrow/js/dom';
 
