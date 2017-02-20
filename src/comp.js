@@ -3,9 +3,9 @@
  * Author : liuyk(liuyk@yonyou.com)
  * Date   : 2017-01-18 09:34:01
  */
-import {compMgr} from 'compox/js/compMgr';
-import {each, isArray} from 'tinper-sparrow/js/util';
-import {getOffset, getScroll} from 'tinper-sparrow/js/dom';
+import {compMgr} from 'compox/src/compMgr';
+import {each, isArray} from 'tinper-sparrow/src/util';
+import {getOffset, getScroll} from 'tinper-sparrow/src/dom';
 
 const createComp = function(ele,viewModel){
     var options = JSON.parse(ele.getAttribute('u-meta'));

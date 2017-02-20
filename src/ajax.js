@@ -4,7 +4,7 @@
  * Date   : 2017-01-18 09:34:01
  */
 
-import {ajax as uAjax} from 'tinper-sparrow/js/ajax';
+import {ajax as uAjax} from 'tinper-sparrow/src/ajax';
 
 const ajax = function (params) {
     params = _wrapAjax.call(this,params)

@@ -4,8 +4,8 @@
  * Date   : 2017-01-18 09:34:01
  */
 
-import {env} from 'tinper-sparrow/js/env';
-import {getOffset} from 'tinper-sparrow/js/dom';
+import {env} from 'tinper-sparrow/src/env';
+import {getOffset} from 'tinper-sparrow/src/dom';
 /**
  * 控件数据校验
  * @param {Object} element

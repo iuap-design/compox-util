@@ -4,7 +4,7 @@
  * Date   : 2017-01-18 09:34:01
  */
 
-import {each} from 'tinper-sparrow/js/util';
+import {each} from 'tinper-sparrow/src/util';
 const setEnable = function (enable) {
     each(this.elements, function (i, element) {
         if(element){
