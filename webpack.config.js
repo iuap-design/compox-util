@@ -4,7 +4,7 @@ var path = require('path');
 var env = require('yargs').argv.mode;
 var fs = require('fs');
 
-var libraryName = 'compox.util';
+var libraryName = 'compox-util';
 var data = fs.readFileSync('./package.json', 'utf8');
 var packageObj = JSON.parse(data);
 var headerStr = '';
@@ -29,7 +29,7 @@ var config = {
 	entry: __dirname + '/src/index.js',
 	// devtool: 'source-map',
 	output: {
-		path: __dirname + '/dist/js',
+		path: __dirname + '/dist',
 		filename: outputFile,
 		//library: 'u',
 		libraryTarget: 'var',
