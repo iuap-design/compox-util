@@ -5,7 +5,7 @@
  */
 
 //相关依赖导入
-import {App} from 'compox/src/createApp';
+// import {App} from 'compox/src/index';
 
 import {
 	setAdjustMetaFunc
