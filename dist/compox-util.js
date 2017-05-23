@@ -1,5 +1,5 @@
 /**
- * compox-util v3.2.0
+ * compox-util v3.2.1
  * 
  * author : yonyou FED
  * homepage : https://github.com/iuap-design/compox-util#readme
@@ -53,13 +53,13 @@ var getDataTables = function getDataTables() {
  * @param {Object} element
  * @param {Object} value
  */
-var hasClass = function hasClass(element, value) {
-	if (!element) return false;
-	if (element.nodeName && (element.nodeName === '#text' || element.nodeName === '#comment')) return false;
-	if (typeof element.classList === 'undefined') {
-		if (u._hasClass) {
+var hasClass = function(element, value) {
+	if(!element) return false;
+	if(element.nodeName && (element.nodeName === '#text' || element.nodeName === '#comment')) return false;
+	if(typeof element.classList === 'undefined') {
+		if(u._hasClass){
 			return u._hasClass(element, value);
-		} else {
+		}else{
 			return $(element).hasClass(value);
 		}
 
@@ -68,42 +68,42 @@ var hasClass = function hasClass(element, value) {
 		return element.classList.contains(value);
 	}
 };
-var getOffset = function getOffset(Node, offset) {
-	if (!offset) {
+var getOffset = function(Node, offset) {
+	if(!offset) {
 		offset = {};
 		offset.top = 0;
 		offset.left = 0;
 	}
-	if (Node == document.body) {
+	if(Node == document.body) {
 		return offset;
 	}
 	offset.top += Node.offsetTop;
 	offset.left += Node.offsetLeft;
-	if (Node.offsetParent) return getOffset(Node.offsetParent, offset);else return offset;
+	if(Node.offsetParent)
+		return getOffset(Node.offsetParent, offset);
+	else
+		return offset;
 };
-var getScroll = function getScroll(Node, offset) {
-	if (!offset) {
+var getScroll = function(Node, offset) {
+	if(!offset) {
 		offset = {};
 		offset.top = 0;
 		offset.left = 0;
 	}
-	if (Node == document.body) {
+	if(Node == document.body) {
 		offset.top += Node.scrollTop || document.documentElement.scrollTop;
 		offset.left += Node.scrollLeft || document.documentElement.scrollLeft;
 		return offset;
 	}
-	if (Node.tagName != 'INPUT') {
+	if(Node.tagName != 'INPUT'){
 		offset.top += Node.scrollTop;
 		offset.left += Node.scrollLeft;
 	}
 
-	if (Node.parentNode) return getScroll(Node.parentNode, offset);else return offset;
-};
-
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) {
-  return typeof obj;
-} : function (obj) {
-  return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
+	if(Node.parentNode)
+		return getScroll(Node.parentNode, offset);
+	else
+		return offset;
 };
 
 /**
@@ -116,41 +116,46 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
  * 创建一个带壳的对象,防止外部修改
  * @param {Object} proto
  */
-var isArray = Array.isArray || function (val) {
+var isArray = Array.isArray || function(val) {
 	return Object.prototype.toString.call(val) === '[object Array]';
 };
-var inArray = function inArray(node, arr) {
-	if (!arr instanceof Array) {
+var inArray = function(node, arr) {
+	if(!arr instanceof Array) {
 		throw "arguments is not Array";
 	}
-	for (var i = 0, k = arr.length; i < k; i++) {
-		if (node == arr[i]) {
+	for(var i = 0, k = arr.length; i < k; i++) {
+		if(node == arr[i]) {
 			return true;
 		}
 	}
 	return false;
 };
-var each = function each(obj, callback) {
-	if (obj.forEach) {
-		obj.forEach(function (v, k) {
+var each = function(obj, callback) {
+	if(obj.forEach) {
+		obj.forEach(function(v, k) {
 			callback(k, v);
 		});
-	} else if (obj instanceof Object) {
-		for (var k in obj) {
+
+	} else if(obj instanceof Object) {
+		for(var k in obj) {
 			callback(k, obj[k]);
 		}
 	} else {
 		return;
 	}
+
 };
-try {
+try{
 	NodeList.prototype.forEach = Array.prototype.forEach;
-} catch (e) {}
+}catch(e){
+	
+}
+
 
 /**
  * 获得字符串的字节长度
  */
-String.prototype.lengthb = function () {
+String.prototype.lengthb = function() {
 	//	var str = this.replace(/[^\x800-\x10000]/g, "***");
 	var str = this.replace(/[^\x00-\xff]/g, "**");
 	return str.length;
@@ -159,7 +164,7 @@ String.prototype.lengthb = function () {
 /**
  * 将AFindText全部替换为ARepText
  */
-String.prototype.replaceAll = function (AFindText, ARepText) {
+String.prototype.replaceAll = function(AFindText, ARepText) {
 	//自定义String对象的方法
 	var raRegExp = new RegExp(AFindText, "g");
 	return this.replace(raRegExp, ARepText);
@@ -196,7 +201,7 @@ function _isElementUpgraded(element, jsClass) {
 }
 
 function _upgradeElement(element, optJsClass) {
-    if (!((typeof element === 'undefined' ? 'undefined' : _typeof(element)) === 'object' && element instanceof Element)) {
+    if (!(typeof element === 'object' && element instanceof Element)) {
         throw new Error('Invalid argument provided to upgrade MDL element.');
     }
     var upgradedList = _getUpgradedListOfElement(element);
@@ -205,7 +210,8 @@ function _upgradeElement(element, optJsClass) {
         var className = element.className;
         for (var i = 0; i < CompMgr.registeredControls.length; i++) {
             var component = CompMgr.registeredControls[i];
-            if (className.indexOf(component.cssClass) > -1 && classesToUpgrade.indexOf(component) === -1 && !_isElementUpgraded(element, component.className)) {
+            if (className.indexOf(component.cssClass) > -1 && classesToUpgrade.indexOf(component) === -1 &&
+                !_isElementUpgraded(element, component.className)) {
                 classesToUpgrade.push(component);
             }
         }
@@ -233,6 +239,7 @@ function _upgradeElement(element, optJsClass) {
         } else {
             throw new Error('Unable to find a registered component for the given class.');
         }
+
     }
 }
 
@@ -242,7 +249,7 @@ function _upgradeDomInternal(optJsClass, optCssClass, ele) {
             _upgradeDomInternal(CompMgr.registeredControls[i].className, registeredControls[i].cssClass, ele);
         }
     } else {
-        var jsClass = optJsClass;
+        var jsClass = (optJsClass);
         if (!optCssClass) {
             var registeredClass = _findRegisteredClass(jsClass);
             if (registeredClass) {
@@ -272,7 +279,7 @@ var CompMgr = {
      *
      * @param options  {el:'#content', model:{}}
      */
-    apply: function apply(options) {
+    apply: function(options) {
         if (options) {
             var _el = options.el || document.body;
             var model = options.model;
@@ -280,9 +287,10 @@ var CompMgr = {
         if (typeof _el == 'string') {
             _el = document.body.querySelector(_el);
         }
-        if (_el == null || (typeof _el === 'undefined' ? 'undefined' : _typeof(_el)) != 'object') _el = document.body;
+        if (_el == null || typeof _el != 'object')
+            _el = document.body;
         var comps = _el.querySelectorAll('[u-meta]');
-        comps.forEach(function (element) {
+        comps.forEach(function(element) {
             if (element['comp']) return;
             var options = JSON.parse(element.getAttribute('u-meta'));
             if (options && options['type']) {
@@ -299,7 +307,7 @@ var CompMgr = {
             }
         });
     },
-    addPlug: function addPlug(config) {
+    addPlug: function(config) {
         var plug = config['plug'],
             name = config['name'];
         this.plugs || (this.plugs = {});
@@ -309,7 +317,7 @@ var CompMgr = {
         plug.compType = name;
         this.plugs[name] = plug;
     },
-    addDataAdapter: function addDataAdapter(config) {
+    addDataAdapter: function(config) {
         var adapter = config['adapter'],
             name = config['name'];
         //dataType = config['dataType'] || ''
@@ -319,8 +327,9 @@ var CompMgr = {
             throw new Error('dataAdapter has exist:' + name);
         }
         this.dataAdapters[name] = adapter;
+
     },
-    getDataAdapter: function getDataAdapter(name) {
+    getDataAdapter: function(name) {
         if (!name) return;
         this.dataAdapters || (dataAdapters = {});
         //var key = dataType ? name + '.' + dataType : name;
@@ -331,7 +340,7 @@ var CompMgr = {
      * @param  {[type]} options [description]
      * @return {[type]}         [description]
      */
-    createDataAdapter: function createDataAdapter(options) {
+    createDataAdapter: function(options) {
         var opt = options['options'];
         var type = opt['type'],
             id = opt['id'];
@@ -342,7 +351,7 @@ var CompMgr = {
         comp.id = id;
         return comp;
     },
-    _createComp: function _createComp(options) {
+    _createComp: function(options) {
         var opt = options['options'];
         var type = opt['type'];
         var plug = this.plugs[type];
@@ -354,7 +363,7 @@ var CompMgr = {
     /**
      * 注册UI控件
      */
-    regComp: function regComp(config) {
+    regComp: function(config) {
         var newConfig = {
             classConstructor: config.comp,
             className: config.compAsString || config['compAsString'],
@@ -375,14 +384,14 @@ var CompMgr = {
         }
         this.registeredControls.push(newConfig);
     },
-    updateComp: function updateComp(ele) {
+    updateComp: function(ele) {
         this._reorderComps();
         for (var n = 0; n < this.registeredControls.length; n++) {
             _upgradeDomInternal(this.registeredControls[n].className, null, ele);
         }
     },
     // 后续遍历registeredControls，重新排列
-    _reorderComps: function _reorderComps() {
+    _reorderComps: function() {
         var tmpArray = [];
         var dictory = {};
 
@@ -524,13 +533,15 @@ var showComp = function showComp(comp) {
 
 var enumerables = true;
 var enumerablesTest = {
-	toString: 1
-};
-for (var i in enumerablesTest) {
+		toString: 1
+	};
+for(var i in enumerablesTest) {
 	enumerables = null;
 }
-if (enumerables) {
-	enumerables = ['hasOwnProperty', 'valueOf', 'isPrototypeOf', 'propertyIsEnumerable', 'toLocaleString', 'toString', 'constructor'];
+if(enumerables) {
+	enumerables = ['hasOwnProperty', 'valueOf', 'isPrototypeOf', 'propertyIsEnumerable',
+		'toLocaleString', 'toString', 'constructor'
+	];
 }
 
 /**
@@ -545,21 +556,21 @@ if (enumerables) {
  * @param {Object}  目标对象
  * @param {config} 源对象
  */
-var extend = function extend(object, config) {
+var extend = function(object, config) {
 	var args = arguments,
-	    options;
-	if (args.length > 1) {
-		for (var len = 1; len < args.length; len++) {
+		options;
+	if(args.length > 1) {
+		for(var len = 1; len < args.length; len++) {
 			options = args[len];
-			if (object && options && (typeof options === 'undefined' ? 'undefined' : _typeof(options)) === 'object') {
+			if(object && options && typeof options === 'object') {
 				var i, j, k;
-				for (i in options) {
+				for(i in options) {
 					object[i] = options[i];
 				}
-				if (enumerables) {
-					for (j = enumerables.length; j--;) {
+				if(enumerables) {
+					for(j = enumerables.length; j--;) {
 						k = enumerables[j];
-						if (options.hasOwnProperty && options.hasOwnProperty(k)) {
+						if(options.hasOwnProperty && options.hasOwnProperty(k)) {
 							object[k] = options[k];
 						}
 					}
@@ -570,7 +581,7 @@ var extend = function extend(object, config) {
 	return object;
 };
 
-if (!Object.assign) {
+if(!Object.assign){
 	Object.assign = extend;
 }
 
@@ -582,8 +593,9 @@ if (!Object.assign) {
 
 var u$1 = {};
 
+
 extend(u$1, {
-	isIE: false,
+	isIE:  false,
 	isFF: false,
 	isOpera: false,
 	isChrome: false,
@@ -607,169 +619,177 @@ extend(u$1, {
 	isUnix: false,
 	isLinux: false,
 	isAndroid: false,
-	isAndroidPAD: false,
-	isAndroidPhone: false,
+	isAndroidPAD:false,
+	isAndroidPhone:false,
 	isMac: false,
 	hasTouch: false,
 	isMobile: false
 });
 
-(function () {
+(function() {
 	var userAgent = navigator.userAgent,
-	    rMsie = /(msie\s|trident.*rv:)([\w.]+)/,
-	    rFirefox = /(firefox)\/([\w.]+)/,
-	    rOpera = /(opera).+version\/([\w.]+)/,
-	    rChrome = /(chrome)\/([\w.]+)/,
-	    rSafari = /version\/([\w.]+).*(safari)/,
-	    version,
-	    ua = userAgent.toLowerCase(),
-	    s,
-	    browserMatch = {
-		browser: "",
-		version: ''
-	},
-	    match = rMsie.exec(ua);
+		rMsie = /(msie\s|trident.*rv:)([\w.]+)/,
+		rFirefox = /(firefox)\/([\w.]+)/,
+		rOpera = /(opera).+version\/([\w.]+)/,
+		rChrome = /(chrome)\/([\w.]+)/,
+		rSafari = /version\/([\w.]+).*(safari)/,
+		version,
+		ua = userAgent.toLowerCase(),
+		s,
+		browserMatch = {
+			browser: "",
+			version: ''
+		},
+		match = rMsie.exec(ua);
 
-	if (match != null) {
+	if(match != null) {
 		browserMatch = {
 			browser: "IE",
 			version: match[2] || "0"
 		};
 	}
 	match = rFirefox.exec(ua);
-	if (match != null) {
+	if(match != null) {
 		browserMatch = {
 			browser: match[1] || "",
 			version: match[2] || "0"
 		};
 	}
 	match = rOpera.exec(ua);
-	if (match != null) {
+	if(match != null) {
 		browserMatch = {
 			browser: match[1] || "",
 			version: match[2] || "0"
 		};
 	}
 	match = rChrome.exec(ua);
-	if (match != null) {
+	if(match != null) {
 		browserMatch = {
 			browser: match[1] || "",
 			version: match[2] || "0"
 		};
 	}
 	match = rSafari.exec(ua);
-	if (match != null) {
+	if(match != null) {
 		browserMatch = {
 			browser: match[2] || "",
 			version: match[1] || "0"
 		};
 	}
 
-	if (userAgent.indexOf("Edge") > -1) {
+	if(userAgent.indexOf("Edge") > -1){
 		u$1.isEdge = true;
 	}
-	if (s = ua.match(/opera.([\d.]+)/)) {
+	if(s = ua.match(/opera.([\d.]+)/)) {
 		u$1.isOpera = true;
-	} else if (browserMatch.browser == "IE" && browserMatch.version == 11) {
+	} else if(browserMatch.browser == "IE" && browserMatch.version == 11) {
 		u$1.isIE11 = true;
 		u$1.isIE = true;
-	} else if (s = ua.match(/chrome\/([\d.]+)/)) {
+	} else if(s = ua.match(/chrome\/([\d.]+)/)) {
 		u$1.isChrome = true;
 		u$1.isStandard = true;
-	} else if (s = ua.match(/version\/([\d.]+).*safari/)) {
+	} else if(s = ua.match(/version\/([\d.]+).*safari/)) {
 		u$1.isSafari = true;
 		u$1.isStandard = true;
-	} else if (s = ua.match(/gecko/)) {
+	} else if(s = ua.match(/gecko/)) {
 		//add by licza : support XULRunner
 		u$1.isFF = true;
 		u$1.isStandard = true;
-	} else if (s = ua.match(/msie ([\d.]+)/)) {
+	} else if(s = ua.match(/msie ([\d.]+)/)) {
 		u$1.isIE = true;
-	} else if (s = ua.match(/firefox\/([\d.]+)/)) {
+	} else if(s = ua.match(/firefox\/([\d.]+)/)) {
 		u$1.isFF = true;
 		u$1.isStandard = true;
 	}
-	if (ua.match(/webkit\/([\d.]+)/)) {
+	if(ua.match(/webkit\/([\d.]+)/)) {
 		u$1.isWebkit = true;
 	}
-	if (ua.match(/ipad/i)) {
+	if(ua.match(/ipad/i)) {
 		u$1.isIOS = true;
 		u$1.isIPAD = true;
 		u$1.isStandard = true;
 	}
 
-	if (ua.match(/iphone/i)) {
+	if(ua.match(/iphone/i)) {
 		u$1.isIOS = true;
 		u$1.isIphone = true;
 	}
 
-	if (navigator.platform == "Mac68K" || navigator.platform == "MacPPC" || navigator.platform == "Macintosh" || navigator.platform == "MacIntel") {
+	if((navigator.platform == "Mac68K") || (navigator.platform == "MacPPC") || (navigator.platform == "Macintosh") || (navigator.platform == "MacIntel")) {
 		//u.isIOS = true;
 		u$1.isMac = true;
 	}
 
-	if (navigator.platform == "Win32" || navigator.platform == "Windows" || navigator.platform == "Win64") {
+	if((navigator.platform == "Win32") || (navigator.platform == "Windows") || (navigator.platform == "Win64")) {
 		u$1.isWin = true;
 	}
 
-	if (navigator.platform == "X11" && !u$1.isWin && !u$1.isMac) {
+	if((navigator.platform == "X11") && !u$1.isWin && !u$1.isMac) {
 		u$1.isUnix = true;
 	}
-	if (String(navigator.platform).indexOf("Linux") > -1) {
+	if((String(navigator.platform).indexOf("Linux") > -1)) {
 		u$1.isLinux = true;
 	}
 
-	if (ua.indexOf('Android') > -1 || ua.indexOf('android') > -1 || ua.indexOf('Adr') > -1 || ua.indexOf('adr') > -1) {
+	if(ua.indexOf('Android') > -1 || ua.indexOf('android') > -1 || ua.indexOf('Adr') > -1 || ua.indexOf('adr') > -1) {
 		u$1.isAndroid = true;
 	}
 
-	u$1.version = version ? browserMatch.version ? browserMatch.version : 0 : 0;
-	if (u$1.isAndroid) {
-		if (window.screen.width >= 768 && window.screen.width < 1024) {
-			u$1.isAndroidPAD = true;
+	u$1.version = version ? (browserMatch.version ? browserMatch.version : 0) : 0;
+	if(u$1.isAndroid){
+		if(window.screen.width>=768&&window.screen.width<1024){
+			u$1.isAndroidPAD=true;
 		}
-		if (window.screen.width <= 768) {
+		if(window.screen.width<=768) {
 			u$1.isAndroidPhone = true;
 		}
 	}
-	if (u$1.isIE) {
+	if(u$1.isIE) {
 		var intVersion = parseInt(u$1.version);
 		var mode = document.documentMode;
-		if (mode == null) {
-			if (intVersion == 6 || intVersion == 7) {
+		if(mode == null) {
+			if(intVersion == 6 || intVersion == 7) {
 				u$1.isIE8_BEFORE = true;
 			}
 		} else {
-			if (mode == 7) {
+			if(mode == 7) {
 				u$1.isIE8_BEFORE = true;
-			} else if (mode == 8) {
+			} else if(mode == 8) {
 				u$1.isIE8 = true;
-			} else if (mode == 9) {
+			} else if(mode == 9) {
 				u$1.isIE9 = true;
 				u$1.isSTANDARD = true;
-			} else if (mode == 10) {
+			} else if(mode == 10) {
 				u$1.isIE10 = true;
 				u$1.isSTANDARD = true;
 				u$1.isIE10_ABOVE = true;
 			} else {
 				u$1.isSTANDARD = true;
 			}
-			if (intVersion == 8) {
+			if(intVersion == 8) {
 				u$1.isIE8_CORE = true;
-			} else if (intVersion == 9) {
+			} else if(intVersion == 9) {
 				u$1.isIE9_CORE = true;
-			} else if (browserMatch.version == 11) {
+			} else if(browserMatch.version == 11) {
 				u$1.isIE11 = true;
 			}
 		}
 	}
-	if ("ontouchend" in document) {
+	if("ontouchend" in document) {
 		u$1.hasTouch = true;
 	}
-	if (u$1.isIphone || u$1.isAndroidPhone) u$1.isMobile = true;
+	if(u$1.isIphone || u$1.isAndroidPhone)
+		u$1.isMobile = true;
+
 })();
 
 var env = u$1;
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) {
+  return typeof obj;
+} : function (obj) {
+  return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
+};
 
 /**
  * Module : compox-util validate
@@ -902,34 +922,34 @@ var XmlHttp = {
 	get: "get",
 	post: "post",
 	reqCount: 4,
-	createXhr: function createXhr() {
+	createXhr: function() {
 		var xmlhttp = null;
 		/*if (window.XMLHttpRequest) {
-    xmlhttp = new XMLHttpRequest();
-  } else {
-    xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-  }*/
-		if (env.isIE8) {
+		  xmlhttp = new XMLHttpRequest();
+		} else {
+		  xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+		}*/
+		if(env.isIE8) {
 			xmlhttp = new ActiveXObject("Microsoft.XMLHTTP"); //IE低版本创建XMLHTTP
-		} else if (env.isIE) {
+		} else if(env.isIE) {
 			xmlhttp = new ActiveXObject("Msxml2.XMLHTTP"); //IE高版本创建XMLHTTP
-		} else if (window.XMLHttpRequest) {
+		} else if(window.XMLHttpRequest) {
 			xmlhttp = new XMLHttpRequest();
 		}
 		return xmlhttp;
 	},
-	ajax: function ajax(_json) {
+	ajax: function(_json) {
 		var url = _json["url"];
 		var callback = _json["success"];
-		var async = _json["async"] == undefined ? true : _json["async"];
+		var async = (_json["async"] == undefined ? true : _json["async"]);
 		var error = _json["error"];
 		var params = _json["data"] || {};
 		var method = (_json["type"] == undefined ? XmlHttp.post : _json["type"]).toLowerCase();
 		var gzipFlag = params.compressType;
 		url = XmlHttp.serializeUrl(url);
 		params = XmlHttp.serializeParams(params);
-		if (method == XmlHttp.get && params != null) {
-			url += "&" + params;
+		if(method == XmlHttp.get && params != null) {
+			url += ("&" + params);
 			params = null; //如果是get请求,保证最终会执行send(null)
 		}
 
@@ -937,19 +957,20 @@ var XmlHttp = {
 		//xmlhttp.open(method, url+ escape(new Date()), async);
 		xmlhttp.open(method, url, async);
 
-		if (method == XmlHttp.post) {
-			xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded;charset=UTF-8");
+		if(method == XmlHttp.post) {
+			xmlhttp.setRequestHeader("Content-type",
+				"application/x-www-form-urlencoded;charset=UTF-8");
 		}
 
 		var execount = 0;
 		// 异步
-		if (async) {
+		if(async) {
 			// readyState 从 1~4发生4次变化
-			xmlhttp.onreadystatechange = function () {
+			xmlhttp.onreadystatechange = function() {
 				execount++;
 				// 等待readyState状态不再变化之后,再执行回调函数
 				//if (execount == XmlHttp.reqCount) {// 火狐下存在问题，修改判断方式
-				if (xmlhttp.readyState == XmlHttp.reqCount) {
+				if(xmlhttp.readyState == XmlHttp.reqCount) {
 					XmlHttp.execBack(xmlhttp, callback, error);
 				}
 			};
@@ -962,16 +983,16 @@ var XmlHttp = {
 			XmlHttp.execBack(xmlhttp, callback, error);
 		}
 	},
-	execBack: function execBack(xmlhttp, callback, error) {
+	execBack: function(xmlhttp, callback, error) {
 		//if (xmlhttp.readyState == 4
-		if (xmlhttp.status == 200 || xmlhttp.status == 304 || xmlhttp.readyState == 4) {
+		if(xmlhttp.status == 200 || xmlhttp.status == 304 || xmlhttp.readyState == 4) {
 			callback(xmlhttp.responseText, xmlhttp.status, xmlhttp);
 		} else {
-			if (error) {
+			if(error) {
 				error(xmlhttp.responseText, xmlhttp.status, xmlhttp);
 			} else {
 				var errorMsg = "no error callback function!";
-				if (xmlhttp.responseText) {
+				if(xmlhttp.responseText) {
 					errorMsg = xmlhttp.responseText;
 				}
 				alert(errorMsg);
@@ -979,30 +1000,31 @@ var XmlHttp = {
 			}
 		}
 	},
-	serializeUrl: function serializeUrl(url) {
+	serializeUrl: function(url) {
 		var cache = "cache=" + Math.random();
-		if (url.indexOf("?") > 0) {
-			url += "&" + cache;
+		if(url.indexOf("?") > 0) {
+			url += ("&" + cache);
 		} else {
-			url += "?" + cache;
+			url += ("?" + cache);
 		}
 		return url;
 	},
-	serializeParams: function serializeParams(params) {
+	serializeParams: function(params) {
 		var ud = undefined;
-		if (ud == params || params == null || params == "") {
+		if(ud == params || params == null || params == "") {
 			return null;
 		}
-		if (params.constructor == Object) {
+		if(params.constructor == Object) {
 			var result = "";
-			for (var p in params) {
-				result += p + "=" + encodeURIComponent(params[p]) + "&";
+			for(var p in params) {
+				result += (p + "=" + encodeURIComponent(params[p]) + "&");
 			}
 			return result.substring(0, result.length - 1);
 		}
 		return params;
 	}
 };
+
 
 var ajax$1 = XmlHttp.ajax;
 
