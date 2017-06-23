@@ -1,5 +1,5 @@
 /**
- * compox-util v3.2.1
+ * compox-util v3.2.2
  * 
  * author : yonyou FED
  * homepage : https://github.com/iuap-design/compox-util#readme
@@ -116,9 +116,6 @@ var getScroll = function(Node, offset) {
  * 创建一个带壳的对象,防止外部修改
  * @param {Object} proto
  */
-var isArray = Array.isArray || function(val) {
-	return Object.prototype.toString.call(val) === '[object Array]';
-};
 var inArray = function(node, arr) {
 	if(!arr instanceof Array) {
 		throw "arguments is not Array";
@@ -427,31 +424,27 @@ var compMgr = CompMgr;
 var createComp = function createComp(ele, viewModel) {
     var options = JSON.parse(ele.getAttribute('u-meta'));
     if (options && options['type']) {
-        var comp = compMgr.createDataAdapter({ el: ele, options: options, model: viewModel, app: this });
+        var comp = compMgr.createDataAdapter({
+            el: ele,
+            options: options,
+            model: viewModel,
+            app: this
+        });
         ele['u-meta'] = comp;
+        this.comps.push(comp);
     }
     return comp;
 };
 
 var getComp = function getComp(compId) {
-    var returnComp = null;
-    each(this.elements, function (i, element) {
-        if (typeof element === 'string') {
-            element = document.querySelector(element);
+    var comps = this.getComps();
+    for (var i = 0; i < comps.length; i++) {
+        var comp = comps[i];
+        if (comp.id == compId) {
+            return comp;
         }
-        if (element) {
-            element.querySelectorAll('[u-meta]').forEach(function (ele) {
-                if (ele['u-meta']) {
-                    var comp = ele['u-meta'];
-                    if (comp.id === compId) {
-                        returnComp = comp;
-                        return false;
-                    }
-                }
-            });
-        }
-    });
-    return returnComp;
+    }
+    return null;
 };
 
 var getCompsByDataTable = function getCompsByDataTable(dataTableId, element) {
@@ -469,20 +462,13 @@ var getCompsByDataTable = function getCompsByDataTable(dataTableId, element) {
  * @param {object} element
  */
 var getCompsByType = function getCompsByType(type, element) {
-    var elements = element ? element : this.elements;
-    var returnComps = [];
-    if (!isArray(elements)) elements = [elements];
-    each(elements, function (i, element) {
-        if (element) {
-            element.querySelectorAll('[u-meta]').forEach(function (ele) {
-                if (ele['u-meta']) {
-                    var comp = ele['u-meta'];
-                    if (comp && comp.type == type) returnComps.push(comp);
-                }
-            });
-        }
-    });
-    return returnComps;
+    var comps = this.getComps(element),
+        targetComps = [];
+    for (var i = 0; i < comps.length; i++) {
+        var comp = comps[i];
+        if (comp && comp.type == type) targetComps.push(comp);
+    }
+    return targetComps;
 };
 
 /**
@@ -490,23 +476,11 @@ var getCompsByType = function getCompsByType(type, element) {
  * @param {object} element
  */
 var getComps = function getComps(element) {
-    var elements = element ? element : this.elements;
-    var returnComps = [];
-    if (typeof elements == 'string') {
-        elements = document.querySelectorAll(elements);
+    if (element) {
+        return this.getCompsByElement(element);
+    } else {
+        return this.comps;
     }
-    if (!isArray(elements) && !(elements instanceof NodeList)) elements = [elements];
-    each(elements, function (i, element) {
-        if (element) {
-            element.querySelectorAll('[u-meta]').forEach(function (ele) {
-                if (ele['u-meta']) {
-                    var comp = ele['u-meta'];
-                    if (comp) returnComps.push(comp);
-                }
-            });
-        }
-    });
-    return returnComps;
 };
 
 /**

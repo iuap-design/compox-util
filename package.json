@@ -1,6 +1,6 @@
 {
   "name": "compox-util",
-  "version": "3.2.1",
+  "version": "3.2.2",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -14,8 +14,8 @@
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0"
   },
   "dependencies": {
-    "compox": "^3.2.1",
-    "tinper-sparrow": "^3.2.2"
+    "compox": "^3.2.2",
+    "tinper-sparrow": "^3.2.3"
   },
   "devDependencies": {
     "babel-cli": "^6.18.0",
