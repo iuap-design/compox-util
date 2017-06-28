@@ -23,6 +23,7 @@ import {
 	getCompsByDataTable,
 	getCompsByType,
 	getComps,
+	getCompsByElement,
 	showComp
 } from './comp';
 
@@ -74,6 +75,7 @@ App.prototype.getComp = getComp;
 App.prototype.getCompsByDataTable = getCompsByDataTable;
 App.prototype.getCompsByType = getCompsByType;
 App.prototype.getComps = getComps;
+App.prototype.getCompsByElement = getCompsByElement;
 App.prototype.showComp = showComp;
 // validate
 App.prototype.compsValidate = compsValidate;
