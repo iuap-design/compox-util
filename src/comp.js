@@ -15,6 +15,9 @@ import {
     getScroll
 } from 'tinper-sparrow/src/dom';
 
+/**
+ * 渲染制定的u-meta的kero控件
+ */
 const createComp = function(ele, viewModel) {
     var options = JSON.parse(ele.getAttribute('u-meta'));
     if (options && options['type']) {
