@@ -1,5 +1,5 @@
 /**
- * compox-util v3.2.2
+ * compox-util v3.2.3
  * 
  * author : yonyou FED
  * homepage : https://github.com/iuap-design/compox-util#readme
@@ -116,6 +116,9 @@ var getScroll = function(Node, offset) {
  * 创建一个带壳的对象,防止外部修改
  * @param {Object} proto
  */
+var isArray = Array.isArray || function(val) {
+	return Object.prototype.toString.call(val) === '[object Array]';
+};
 var inArray = function(node, arr) {
 	if(!arr instanceof Array) {
 		throw "arguments is not Array";
@@ -421,6 +424,9 @@ var compMgr = CompMgr;
  * Author : liuyk(liuyk@yonyou.com)
  * Date   : 2017-01-18 09:34:01
  */
+/**
+ * 渲染制定的u-meta的kero控件
+ */
 var createComp = function createComp(ele, viewModel) {
     var options = JSON.parse(ele.getAttribute('u-meta'));
     if (options && options['type']) {
@@ -481,6 +487,30 @@ var getComps = function getComps(element) {
     } else {
         return this.comps;
     }
+};
+
+/**
+ * 获取某区域中的所有控件
+ * @param {object} element
+ */
+var getCompsByElement = function getCompsByElement(element) {
+    var elements = element ? element : this.elements;
+    var returnComps = [];
+    if (typeof elements == 'string') {
+        elements = document.querySelectorAll(elements);
+    }
+    if (!isArray(elements) && !(elements instanceof NodeList)) elements = [elements];
+    each(elements, function (i, element) {
+        if (element) {
+            element.querySelectorAll('[u-meta]').forEach(function (ele) {
+                if (ele['u-meta']) {
+                    var comp = ele['u-meta'];
+                    if (comp) returnComps.push(comp);
+                }
+            });
+        }
+    });
+    return returnComps;
 };
 
 /**
@@ -1105,6 +1135,7 @@ App.prototype.getComp = getComp;
 App.prototype.getCompsByDataTable = getCompsByDataTable;
 App.prototype.getCompsByType = getCompsByType;
 App.prototype.getComps = getComps;
+App.prototype.getCompsByElement = getCompsByElement;
 App.prototype.showComp = showComp;
 // validate
 App.prototype.compsValidate = compsValidate;

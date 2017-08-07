@@ -1,3 +1,13 @@
+<a name="3.2.3"></a>
+## [3.2.3](https://github.com/iuap-design/compox-util/compare/v3.2.2...v3.2.3) (2017-08-07)
+
+
+### Bug Fixes
+
+* 修改getCompsByElement未找到bug ([11a475d](https://github.com/iuap-design/compox-util/commit/11a475d))
+
+
+
 <a name="3.2.2"></a>
 ## [3.2.2](https://github.com/iuap-design/compox-util/compare/v3.2.1...v3.2.2) (2017-06-13)
 
